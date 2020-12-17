@@ -1,1 +1,6 @@
-/home/d3t0x/IdeaProjects/spring-project/src/main/java/hu/unideb/SpringBootRestApplication.java
+/home/d3t0x/Asztal/git/spring-webfejl-projekt/spring-project/src/main/java/hu/unideb/entities/ToDo.java
+/home/d3t0x/Asztal/git/spring-webfejl-projekt/spring-project/src/main/java/hu/unideb/SpringBootRestApplication.java
+/home/d3t0x/Asztal/git/spring-webfejl-projekt/spring-project/src/main/java/hu/unideb/connection/MySQLConnection.java
+/home/d3t0x/Asztal/git/spring-webfejl-projekt/spring-project/src/main/java/hu/unideb/controllers/ToDoController.java
+/home/d3t0x/Asztal/git/spring-webfejl-projekt/spring-project/src/main/java/hu/unideb/entities/Level.java
+/home/d3t0x/Asztal/git/spring-webfejl-projekt/spring-project/src/main/java/hu/unideb/exceptions/MySqlConnectionFailedException.java
