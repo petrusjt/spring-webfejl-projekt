@@ -3,6 +3,7 @@ package hu.unideb.connection;
 import hu.unideb.entities.Level;
 import hu.unideb.entities.ToDo;
 import hu.unideb.exceptions.MySqlConnectionFailedException;
+import hu.unideb.exceptions.RecordAlreadyExistsException;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -19,6 +20,7 @@ public class ToDoRepository {
     private PreparedStatement getByIdQuery;
     private PreparedStatement addToDoQuery;
     private PreparedStatement markToDoDoneQuery;
+    private PreparedStatement updateToDoQuery;
 
     {
         try {
@@ -37,7 +39,7 @@ public class ToDoRepository {
             throwables.printStackTrace();
         }
         try {
-            addToDoQuery = conn.prepareStatement("INSERT INTO `ToDo` (`Id`, `shortDescription`, `longDescription`, `deadline`, `level`) " +
+            addToDoQuery = conn.prepareStatement("INSERT INTO `ToDo` (`Id`, `shortDescription`, `longDescription`, `deadline`, `level`, `done`) " +
                     "VALUES (NULL, ?, ?, ?, ?, NULL);");
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -47,10 +49,14 @@ public class ToDoRepository {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+        try {
+            updateToDoQuery = conn.prepareStatement("update `ToDo` SET `shortDescription` = ?, `longDescription` = ?, `level` = ?, `deadline` = ? where `ToDo`.`Id` = ?;");
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 
-    public List<ToDo> getAllToDos()
-    {
+    public List<ToDo> getAllToDos() throws SQLException {
         List<ToDo> toDos = new ArrayList<>();
         try {
             ResultSet resultSet = getAllQuery.executeQuery();
@@ -69,11 +75,12 @@ public class ToDoRepository {
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
+            throw throwables;
         }
         return toDos;
     }
 
-    public ToDo getToDoById(long id) {
+    public ToDo getToDoById(long id) throws SQLException {
         ToDo toDo = null;
         try {
             getByIdQuery.setLong(1, id);
@@ -93,12 +100,19 @@ public class ToDoRepository {
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
+            throw throwables;
         }
         return toDo;
     }
 
-    public void addToDo(ToDo toDo)    {
+    public void addToDo(ToDo toDo) throws SQLException, RecordAlreadyExistsException {
         try {
+            List<ToDo> toDos = getAllToDos();
+            if(toDos.contains(toDo))
+            {
+                throw new RecordAlreadyExistsException();
+            }
+
             addToDoQuery.setString(1, toDo.getShortDescription());
             addToDoQuery.setString(2, toDo.getLongDescription());
             addToDoQuery.setDate(3, new java.sql.Date(toDo.getDeadline().getTime()));
@@ -106,16 +120,32 @@ public class ToDoRepository {
             addToDoQuery.execute();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
+            throw throwables;
         }
     }
 
-    public void markToDoDone(long id)
-    {
+    public void updateToDo(ToDo toDo) throws SQLException {
+        try
+        {
+            updateToDoQuery.setString(1, toDo.getShortDescription());
+            updateToDoQuery.setString(2, toDo.getLongDescription());
+            updateToDoQuery.setInt(3, toDo.getLevel().getOrdinal());
+            updateToDoQuery.setDate(4, new java.sql.Date(toDo.getDeadline().getTime()));
+            updateToDoQuery.setLong(5, toDo.getId());
+            updateToDoQuery.execute();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            throw throwables;
+        }
+    }
+
+    public void markToDoDone(long id) throws SQLException {
         try {
             markToDoDoneQuery.setLong(1, id);
             markToDoDoneQuery.execute();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
+            throw throwables;
         }
     }
 }

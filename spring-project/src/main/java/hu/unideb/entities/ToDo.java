@@ -11,10 +11,13 @@ import java.util.Date;
 @Builder
 @ToString
 public class ToDo {
+    @EqualsAndHashCode.Exclude
     private Long id;
     private String shortDescription;
     private String longDescription;
+    @EqualsAndHashCode.Exclude
     private Date deadline;
     private Level level;
+    @EqualsAndHashCode.Exclude
     private boolean done;
 }

@@ -1,5 +1,4 @@
 hu/unideb/connection/MySQLConnection.class
-hu/unideb/controllers/LongWrapper.class
 hu/unideb/controllers/ToDoController.class
 hu/unideb/entities/Level.class
 hu/unideb/entities/ToDo$ToDoBuilder.class
@@ -7,3 +6,4 @@ hu/unideb/exceptions/MySqlConnectionFailedException.class
 hu/unideb/SpringBootRestApplication.class
 hu/unideb/entities/ToDo.class
 hu/unideb/connection/ToDoRepository.class
+hu/unideb/exceptions/RecordAlreadyExistsException.class
