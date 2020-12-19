@@ -24,39 +24,18 @@ public class ToDoRepository {
 
     {
         try {
-            conn = MySQLConnection.GetConnection();
-        } catch (MySqlConnectionFailedException e) {
+            setupConnection();
+        }/* catch (MySqlConnectionFailedException e) {
+            e.printStackTrace();
+        }*/
+        catch (SQLException e){
             e.printStackTrace();
         }
-        try {
-            getAllQuery = conn.prepareStatement("select * from ToDo;");
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-        try {
-            getByIdQuery = conn.prepareStatement("select * from ToDo where id = ?;");
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-        try {
-            addToDoQuery = conn.prepareStatement("INSERT INTO `ToDo` (`Id`, `shortDescription`, `longDescription`, `deadline`, `level`, `done`) " +
-                    "VALUES (NULL, ?, ?, ?, ?, NULL);");
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-        try {
-            markToDoDoneQuery = conn.prepareStatement("update `ToDo` SET `done` = 1 where `ToDo`.`Id` = ?;");
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-        try {
-            updateToDoQuery = conn.prepareStatement("update `ToDo` SET `shortDescription` = ?, `longDescription` = ?, `level` = ?, `deadline` = ? where `ToDo`.`Id` = ?;");
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
+        
     }
 
     public List<ToDo> getAllToDos() throws SQLException {
+        setupConnection();
         List<ToDo> toDos = new ArrayList<>();
         try {
             ResultSet resultSet = getAllQuery.executeQuery();
@@ -82,6 +61,7 @@ public class ToDoRepository {
 
     public ToDo getToDoById(long id) throws SQLException {
         ToDo toDo = null;
+        setupConnection();
         try {
             getByIdQuery.setLong(1, id);
             ResultSet resultSet = getByIdQuery.executeQuery();
@@ -106,6 +86,7 @@ public class ToDoRepository {
     }
 
     public void addToDo(ToDo toDo) throws SQLException, RecordAlreadyExistsException {
+        setupConnection();
         try {
             List<ToDo> toDos = getAllToDos();
             if(toDos.contains(toDo))
@@ -125,6 +106,7 @@ public class ToDoRepository {
     }
 
     public void updateToDo(ToDo toDo) throws SQLException {
+        setupConnection();
         try
         {
             updateToDoQuery.setString(1, toDo.getShortDescription());
@@ -140,6 +122,7 @@ public class ToDoRepository {
     }
 
     public void markToDoDone(long id) throws SQLException {
+        setupConnection();
         try {
             markToDoDoneQuery.setLong(1, id);
             markToDoDoneQuery.execute();
@@ -147,5 +130,23 @@ public class ToDoRepository {
             throwables.printStackTrace();
             throw throwables;
         }
+    }
+
+    private void setupConnection() throws SQLException
+    {
+        try{
+            conn = MySQLConnection.GetConnection();
+        }
+        catch(MySqlConnectionFailedException e)
+        {
+            e.printStackTrace();
+        }
+        getAllQuery = conn.prepareStatement("select * from ToDo;");
+        getByIdQuery = conn.prepareStatement("select * from ToDo where id = ?;");
+        addToDoQuery = conn.prepareStatement("INSERT INTO `ToDo` (`Id`, `shortDescription`, `longDescription`, `deadline`, `level`, `done`) " +
+        "VALUES (NULL, ?, ?, ?, ?, NULL);");
+        markToDoDoneQuery = conn.prepareStatement("update `ToDo` SET `done` = 1 where `ToDo`.`Id` = ?;");
+        updateToDoQuery = conn.prepareStatement("update `ToDo` SET `shortDescription` = ?, `longDescription` = ?, `level` = ?, `deadline` = ? where `ToDo`.`Id` = ?;");
+
     }
 }

@@ -43,7 +43,7 @@ class ToDoList extends React.Component
                 <tbody>
                     {this.state.data?  this.state.data.map((todo, i) => {
                         console.log(todo);
-                        return <ToDoRow shortDesc={todo.shortDescription} longDesc={todo.longDescription} 
+                        return <ToDoRow id={todo.id} shortDesc={todo.shortDescription} longDesc={todo.longDescription} 
                         deadline={new Date(todo.deadline).toLocaleString().substring(0,14)} level={todo.level} isDone={todo.done} />
                     }) : <tr><td colSpan="5">Nincs megjelenítendő adat.</td></tr>}
                     {/* <ToDoRow shortDesc="TEJ" longDesc="Tejet" deadline="2021.05.20." isDone="false" level="HIGH" />

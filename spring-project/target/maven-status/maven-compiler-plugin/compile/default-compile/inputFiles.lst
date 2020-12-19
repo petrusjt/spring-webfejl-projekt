@@ -1,6 +1,8 @@
-/home/d3t0x/Asztal/git/spring-webfejl-projekt/spring-project/src/main/java/hu/unideb/entities/ToDo.java
-/home/d3t0x/Asztal/git/spring-webfejl-projekt/spring-project/src/main/java/hu/unideb/SpringBootRestApplication.java
-/home/d3t0x/Asztal/git/spring-webfejl-projekt/spring-project/src/main/java/hu/unideb/connection/MySQLConnection.java
-/home/d3t0x/Asztal/git/spring-webfejl-projekt/spring-project/src/main/java/hu/unideb/controllers/ToDoController.java
-/home/d3t0x/Asztal/git/spring-webfejl-projekt/spring-project/src/main/java/hu/unideb/entities/Level.java
-/home/d3t0x/Asztal/git/spring-webfejl-projekt/spring-project/src/main/java/hu/unideb/exceptions/MySqlConnectionFailedException.java
+C:\Users\d3t0x\Desktop\git\spring-webfejl-projekt\spring-project\src\main\java\hu\unideb\controllers\ToDoController.java
+C:\Users\d3t0x\Desktop\git\spring-webfejl-projekt\spring-project\src\main\java\hu\unideb\exceptions\RecordAlreadyExistsException.java
+C:\Users\d3t0x\Desktop\git\spring-webfejl-projekt\spring-project\src\main\java\hu\unideb\entities\ToDo.java
+C:\Users\d3t0x\Desktop\git\spring-webfejl-projekt\spring-project\src\main\java\hu\unideb\SpringBootRestApplication.java
+C:\Users\d3t0x\Desktop\git\spring-webfejl-projekt\spring-project\src\main\java\hu\unideb\connection\ToDoRepository.java
+C:\Users\d3t0x\Desktop\git\spring-webfejl-projekt\spring-project\src\main\java\hu\unideb\connection\MySQLConnection.java
+C:\Users\d3t0x\Desktop\git\spring-webfejl-projekt\spring-project\src\main\java\hu\unideb\exceptions\MySqlConnectionFailedException.java
+C:\Users\d3t0x\Desktop\git\spring-webfejl-projekt\spring-project\src\main\java\hu\unideb\entities\Level.java

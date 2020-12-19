@@ -15,6 +15,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.List;
 
+@CrossOrigin //("http://localhost:8081")
 @RestController
 @RequestMapping("/api/todo")
 public class ToDoController {

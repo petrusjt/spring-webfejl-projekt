@@ -1,6 +1,5 @@
 thead{
     background-color: #888;
-    
 }
 
 td{
@@ -18,6 +17,7 @@ tbody>tr:nth-child(odd){
 
 thead>tr>td{
     width: 18%;
+    padding-bottom: 0.5em;
 }
 table{
     border-collapse: collapse;
