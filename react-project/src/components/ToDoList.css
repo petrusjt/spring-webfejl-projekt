@@ -1,0 +1,26 @@
+thead{
+    background-color: #888;
+    
+}
+
+td{
+    border: 1px solid white;
+    text-align: center; 
+    vertical-align: middle;
+}
+tbody>tr:nth-child(even){
+    background-color: #aaa;
+}
+
+tbody>tr:nth-child(odd){
+    background-color: #eee;
+}
+
+thead>tr>td{
+    width: 18%;
+}
+table{
+    border-collapse: collapse;
+    width: fit-content;
+    margin: auto;
+}
